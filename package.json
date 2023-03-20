@@ -1,6 +1,6 @@
 {
   "name": "go-cqhttp-jsbot",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "基于 go-cqhttp 框架进行二次封装的 sdk 开发包，主要方便直接进行机器人的操作。",
   "main": "index.js",
   "scripts": {
