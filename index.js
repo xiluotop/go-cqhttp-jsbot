@@ -52,7 +52,7 @@ function getFormatData(dataPack) {
                         fromGroup: dataPack.group_id,
                         rawMessage: filterAt(dataPack.raw_message, dataPack.self_id),
                         robot: dataPack.self_id,
-                        isAt: isAt(dataPack.raw_message, dataPack.logonqq),
+                        isAt: isAt(dataPack.raw_message, dataPack.self_id),
                         QQInfo: {
                             card: dataPack.sender.card,
                             nickname: dataPack.sender.nickname
