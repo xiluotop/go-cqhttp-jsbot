@@ -53,7 +53,7 @@ function getFormatData(dataPack: any) {
             fromGroup: dataPack.group_id,
             rawMessage: filterAt(dataPack.raw_message, dataPack.self_id),
             robot: dataPack.self_id,
-            isAt: isAt(dataPack.raw_message, dataPack.logonqq),
+            isAt: isAt(dataPack.raw_message, dataPack.self_id),
             QQInfo: {
               card: dataPack.sender.card, // 群里的自定义名称
               nickname: dataPack.sender.nickname
