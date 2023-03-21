@@ -43,6 +43,27 @@ export declare class Robot extends Event {
     private groupCmdAction;
     constructor(qq: string | number, http: AxiosInstance, botID: any);
     /**
+     * 获取 CQ Code 模板对象
+     */
+    get CQCode(): {
+        Face(id: Number): string;
+        Record(file: string, magic: Number, cache: string, timeout: number): string;
+        Video(file: string, cover: string): string;
+        At(qq: string, name: string): string;
+        Share(url: string, title: string, content: string, image: string): string;
+        Music(type: string, id: Number, url: string, audio: string, title: string, content: string, image: string): string;
+        Image(file: string, type: string, subType: number, url: string, cache: number, id?: number): string;
+        Reply(id: number, text: string, qq: number, time: number, seq: number): string;
+        Redbag(title: string): string;
+        Poke(qq: string): string;
+        Gift(qq: string, id: number): string;
+        Forward(id: string): string;
+        XML(data: string): string;
+        JSON(data: string, resid: number): string;
+        Cardimage(file: string, minwidth: number, minheight: number, maxwidth: number, maxheight: number, source: string, icon: string): string;
+        Tts(text: string): string;
+    };
+    /**
      * 返回实例化机器人的请求器
      */
     get httpRequest(): AxiosInstance;
@@ -115,63 +136,71 @@ export declare class Robot extends Event {
      * @param toqq 目标 QQ
      * @param text 发送的文本
      * @param type 文本类型：xml,json,可不传
+     * @return httpRequestPromise 返回请求的 promise
      */
-    sendPrivateMsg(toqq: string | number, text: string): void;
+    sendPrivateMsg(toqq: string | number, text: string): Promise<import("axios").AxiosResponse<any>>;
     /**
      * 发送群临时会话消息
      * @param fromGroup 来自群号
      * @param toqq 目标 QQ
      * @param text 发送文本
+     * @return httpRequestPromise 返回请求的 promise
      */
-    sendGroupPrivateMsg(fromGroup: string | number, toqq: string | number, text: string): void;
+    sendGroupPrivateMsg(fromGroup: string | number, toqq: string | number, text: string): Promise<import("axios").AxiosResponse<any>>;
     /**
      * 发送群组消息
      * @param toGroup 目标群
      * @param text 文本
      * @param anonymous 是否匿名，默认：false
-     * @param type 文本类型：xml,json,可不传
+     * @return httpRequestPromise 返回请求的 promise
      */
-    sendGroupMsg(toGroup: string | number, text: string, anonymous?: boolean, type?: string): void;
+    sendGroupMsg(toGroup: string | number, text: string, anonymous?: boolean): Promise<void | import("axios").AxiosResponse<any>>;
     /**
      * 私聊发送图片
      * @param toqq      发送目标 qq
      * @param imgSrc    图片资源：url,base64,路径均可
      * @param flashpic  是否发送闪照，默认 false
+     * @return httpRequestPromise 返回请求的 promise
      */
-    sendPrivateImg(toqq: string | number, imgSrc: string, flashpic?: boolean): void;
+    sendPrivateImg(toqq: string | number, imgSrc: string, flashpic?: boolean): Promise<import("axios").AxiosResponse<any>>;
     /**
      * 发送群临时私聊图片
      * @param fromGroup 群号
      * @param toqq      目标 qq
      * @param imgSrc    图片资源
      * @param flashpic  是否闪照
+     * @return httpRequestPromise 返回请求的 promise
      */
-    sendGroupPrivateImg(fromGroup: string | number, toqq: string | number, imgSrc: string, flashpic?: boolean): void;
+    sendGroupPrivateImg(fromGroup: string | number, toqq: string | number, imgSrc: string, flashpic?: boolean): Promise<import("axios").AxiosResponse<any>>;
     /**
      * 向群发送图片
      * @param togroup  目标群号
      * @param imgSrc   图片资源
      * @param flashpic 是否为闪照
+     * @return httpRequestPromise 返回请求的 promise
      */
-    sendGroupImg(togroup: string | number, imgSrc: string, flashpic?: boolean): void;
+    sendGroupImg(togroup: string | number, imgSrc: string, flashpic?: boolean): Promise<void | import("axios").AxiosResponse<any>>;
     /**
      * 私聊发送语音
      * @param toqq      发送目标 qq
      * @param recordSrc    图片资源：url,base64,路径均可
+     * @return httpRequestPromise 返回请求的 promise
      */
-    sendPrivateRecord(toqq: string | number, recordSrc: string): void;
+    sendPrivateRecord(toqq: string | number, recordSrc: string): Promise<import("axios").AxiosResponse<any>>;
     /**
      * 发送群临时私聊图片
      * @param fromGroup 群号
      * @param toqq      目标 qq
      * @param recordSrc    图片资源：url,base64,路径均可
+     * @return httpRequestPromise 返回请求的 promise
      */
-    sendGroupPrivateRecord(fromGroup: string | number, toqq: string | number, recordSrc: string): void;
+    sendGroupPrivateRecord(fromGroup: string | number, toqq: string | number, recordSrc: string): Promise<import("axios").AxiosResponse<any>>;
     /**
      * 向群发送图片
      * @param togroup  目标群号
      * @param recordSrc    图片资源：url,base64,路径均可
+     * @return httpRequestPromise 返回请求的 promise
      */
-    sendGroupRecord(togroup: string | number, recordSrc: string): void;
+    sendGroupRecord(togroup: string | number, recordSrc: string): Promise<void | import("axios").AxiosResponse<any>>;
 }
 export {};

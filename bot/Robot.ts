@@ -1,6 +1,7 @@
 import { Event } from '../core/Event'
 import { AxiosInstance } from 'axios';
 import qs from 'qs';
+import CQCode from './CQCode'
 
 // qq,group 消息结构体
 interface InfoDataPack {
@@ -103,6 +104,13 @@ export class Robot extends Event {
         })
       }
     })
+  }
+
+  /**
+   * 获取 CQ Code 模板对象
+   */
+  public get CQCode(){
+    return CQCode
   }
 
   /**
@@ -210,9 +218,10 @@ export class Robot extends Event {
    * @param toqq 目标 QQ
    * @param text 发送的文本
    * @param type 文本类型：xml,json,可不传
+   * @return httpRequestPromise 返回请求的 promise
    */
   public sendPrivateMsg(toqq: string | number, text: string) {
-    this.http.post('/send_msg',
+    return this.http.post('/send_msg',
       qs.stringify({
         message_type: 'private',
         user_id: toqq,
@@ -226,9 +235,10 @@ export class Robot extends Event {
    * @param fromGroup 来自群号
    * @param toqq 目标 QQ
    * @param text 发送文本
+   * @return httpRequestPromise 返回请求的 promise
    */
   public sendGroupPrivateMsg(fromGroup: string | number, toqq: string | number, text: string) {
-    this.http.post('/send_private_msg',
+    return this.http.post('/send_private_msg',
       qs.stringify({
         user_id: toqq,
         group_id: fromGroup,
@@ -242,10 +252,10 @@ export class Robot extends Event {
    * @param toGroup 目标群
    * @param text 文本
    * @param anonymous 是否匿名，默认：false
-   * @param type 文本类型：xml,json,可不传
+   * @return httpRequestPromise 返回请求的 promise
    */
-  public sendGroupMsg(toGroup: string | number, text: string, anonymous: boolean = false, type: string = '') {
-    this.http.post('/send_msg',
+  public sendGroupMsg(toGroup: string | number, text: string, anonymous: boolean = false) {
+    return this.http.post('/send_msg',
       qs.stringify({
         message_type: 'group',
         group_id: toGroup,
@@ -262,9 +272,10 @@ export class Robot extends Event {
    * @param toqq      发送目标 qq
    * @param imgSrc    图片资源：url,base64,路径均可
    * @param flashpic  是否发送闪照，默认 false
+   * @return httpRequestPromise 返回请求的 promise
    */
   public sendPrivateImg(toqq: string | number, imgSrc: string, flashpic: boolean = false) {
-    this.sendPrivateMsg(toqq, `[CQ:image,file=${imgSrc},type=${flashpic ? 'flash' : 'show'},id=40004]`)
+    return this.sendPrivateMsg(toqq, `[CQ:image,file=${imgSrc},type=${flashpic ? 'flash' : 'show'},id=40004]`)
   }
 
   /**
@@ -273,9 +284,10 @@ export class Robot extends Event {
    * @param toqq      目标 qq
    * @param imgSrc    图片资源
    * @param flashpic  是否闪照
+   * @return httpRequestPromise 返回请求的 promise
    */
   public sendGroupPrivateImg(fromGroup: string | number, toqq: string | number, imgSrc: string, flashpic: boolean = false) {
-    this.sendGroupPrivateMsg(fromGroup, toqq, `[CQ:image,file=${imgSrc},type=${flashpic ? 'flash' : 'show'},id=40004]`)
+    return this.sendGroupPrivateMsg(fromGroup, toqq, `[CQ:image,file=${imgSrc},type=${flashpic ? 'flash' : 'show'},id=40004]`)
   }
 
   /**
@@ -283,18 +295,20 @@ export class Robot extends Event {
    * @param togroup  目标群号
    * @param imgSrc   图片资源
    * @param flashpic 是否为闪照
+   * @return httpRequestPromise 返回请求的 promise
    */
   public sendGroupImg(togroup: string | number, imgSrc: string, flashpic: boolean = false) {
-    this.sendGroupMsg(togroup, `[CQ:image,file=${imgSrc},type=${flashpic ? 'flash' : ''},id=40004,subType=0]`)
+    return this.sendGroupMsg(togroup, `[CQ:image,file=${imgSrc},type=${flashpic ? 'flash' : ''},id=40004,subType=0]`)
   }
 
   /**
    * 私聊发送语音
    * @param toqq      发送目标 qq
    * @param recordSrc    图片资源：url,base64,路径均可
+   * @return httpRequestPromise 返回请求的 promise
    */
   public sendPrivateRecord(toqq: string | number, recordSrc: string) {
-    this.sendPrivateMsg(toqq, `[CQ:image,file=${recordSrc}]`)
+    return this.sendPrivateMsg(toqq, `[CQ:image,file=${recordSrc}]`)
   }
 
   /**
@@ -302,18 +316,20 @@ export class Robot extends Event {
    * @param fromGroup 群号
    * @param toqq      目标 qq
    * @param recordSrc    图片资源：url,base64,路径均可
+   * @return httpRequestPromise 返回请求的 promise
    */
   public sendGroupPrivateRecord(fromGroup: string | number, toqq: string | number, recordSrc: string) {
-    this.sendGroupPrivateMsg(fromGroup, toqq, `[CQ:record,file=${recordSrc}]`)
+    return this.sendGroupPrivateMsg(fromGroup, toqq, `[CQ:record,file=${recordSrc}]`)
   }
 
   /**
    * 向群发送图片
    * @param togroup  目标群号
    * @param recordSrc    图片资源：url,base64,路径均可
+   * @return httpRequestPromise 返回请求的 promise
    */
   public sendGroupRecord(togroup: string | number, recordSrc: string) {
-    this.sendGroupMsg(togroup, `[CQ:record,file=${recordSrc}]`)
+    return this.sendGroupMsg(togroup, `[CQ:record,file=${recordSrc}]`)
   }
 
 
