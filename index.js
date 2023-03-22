@@ -268,12 +268,11 @@ class CQBotSDK {
         });
         // 响应拦截器,不要那么多复杂数据了直接返回 data 就行
         botHttp.interceptors.response.use(function (response) {
-            let returnData = null;
+            let returnData = response.data;
             try {
-                // console.log(response.data)
             }
             catch (error) {
-                returnData = response.data;
+                console.log(error);
             }
             return returnData;
         }, function (error) {

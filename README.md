@@ -1,20 +1,25 @@
 # go-cqhttp-jsbot node.js API更新记录
 
-  更新内容 api 示例使用方法见 test.js 代码
+  文档可参考官方文档，基本以官方数据以及 API 命名方法
+  更新内容 api 示例使用方法可参考 test.js 代码
 
   基本使用方式：
 
   ```javascript
   // 引入平台 SDK
   const BotSDK = require('./go-cqhttp-jsbot.js').BotSDK
-  // 实例化一个平台，框架插件监听地址、用户名、密码、事件上传路径、上传监听端口，不写则默认80
+  // 实例化一个平台，框架地址，反向上报端口
   const botSDK = new BotSDK('localhost', 8888);
-  // 创建一个监听 bot 对象（已挂载至框架内的 qq）
+  // 创建一个监听 bot 对象（已挂载至框架内的 qq），正向端口
   let bot = botSDK.createBot('123456789', 52566);
   // -------------
   ... 可在 test.js 里参照 api 示例使用 bot.xxx 形式注册或调用相关指令功能。
   // -------------
   ```
+## v1.0.5
+* 修复使用自定义 http 请求不返回数据问题
+* 所有 bot 调用的功能均能返回创建请求的 promise 对象，如需返回值可继续使用 then 或者 await 获取返回值内容
+* 主动请求 API 基本上以官方文档请求终结点的驼峰命名，部分可能有所区别
 
 ## v1.0.4
 * 实例机器人添加 CQCode 生成方法如 bot.CQCode.At('123456789')
