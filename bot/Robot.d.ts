@@ -14,16 +14,10 @@ interface InfoDataPack {
     type: string;
 }
 interface EventDataPack {
-    fromUser: {};
-    fromGroup: {};
-    rawMessage: '';
     robot: number;
-    isAt: boolean;
-    QQInfo: {};
     user_id: number;
     group_id: number;
     notice_type: string;
-    nickname: string;
     sub_type: string;
     success: boolean;
     type: string;
@@ -51,7 +45,9 @@ export declare class Robot extends Event {
         Video(file: string, cover: string): string;
         At(qq: string, name: string): string;
         Share(url: string, title: string, content: string, image: string): string;
-        Music(type: string, id: Number, url: string, audio: string, title: string, content: string, image: string): string;
+        Music(type: string, id: Number, url: string, audio: string, title: string, content: string, image: string): string; /**
+         * 获取 CQ Code 模板对象
+         */
         Image(file: string, type: string, subType: number, url: string, cache: number, id?: number): string;
         Reply(id: number, text: string, qq: number, time: number, seq: number): string;
         Redbag(title: string): string;

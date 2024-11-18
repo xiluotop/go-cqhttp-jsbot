@@ -20,16 +20,15 @@ interface InfoDataPack {
 
 // 事件消息结构体
 interface EventDataPack {
-  fromUser: {},
-  fromGroup: {},
-  rawMessage: '',
+  // fromUser: {},
+  // fromGroup: {},
+  // rawMessage: '',
   robot: number,
-  isAt: boolean,
-  QQInfo: {},
+  // isAt: boolean,
+  // QQInfo: { nickname: string},
   user_id: number,
   group_id: number,
   notice_type: string,
-  nickname: string,
   sub_type: string,
   success: boolean,
   type: string,
@@ -264,7 +263,7 @@ export class Robot extends Event {
   /**
      * 设置在线机型
      * @param model 机型名称
-     * @param model_show 
+     * @param model_show
      * @return promise
      */
   public setModelShow(model: string, model_show: string) {
@@ -557,7 +556,7 @@ export class Robot extends Event {
   /**
    * 获取图片信息
    * @param file 图片缓存文件名
-   * @return promise 
+   * @return promise
    */
   public getImage(file: string) {
     return this.http.post('/get_image',
@@ -578,7 +577,7 @@ export class Robot extends Event {
   /**
    * 图片 OCR
    * @param image 图片ID
-   * @return promise 
+   * @return promise
    */
   public ocrImage(image: string) {
     return this.http.post('/ocr_image',
